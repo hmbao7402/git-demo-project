@@ -31,20 +31,40 @@
                             </div>
                             <h4>Hello! let's get started</h4>
                             <h6 class="font-weight-light">Sign in to continue.</h6>
-                            <form class="pt-3">
+
+                            {{-- ERROR MESSAGE --}}
+                            @if(Session::has('error_message'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{-- GET ERROR MESSAGE --}}
+                                <strong>Error</strong> {{Session::get('error_message')}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
+
+                            {{-- LOGIN FORM --}}
+                            <form class="pt-3" action="{{url('admin/login')}}" method="post">@csrf
+                                {{-- EMAIL --}}
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Username">
+                                    <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                        placeholder="Email" required>
                                 </div>
+
+                                {{-- PASSWORD --}}
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg"
-                                        id="exampleInputPassword1" placeholder="Password">
+                                    <input type="password" id="password" name="password"
+                                        class="form-control form-control-lg" placeholder="Password" required>
                                 </div>
+
+                                {{-- SUBMIT BUTTON --}}
                                 <div class="mt-3">
-                                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                        href="index.html">SIGN IN</a>
+                                    <button type="submit"
+                                        class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">
+                                        SIGN IN
+                                    </button>
                                 </div>
-                                <div class="my-2 d-flex justify-content-between align-items-center">
+                                {{-- <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">
                                         <label class="form-check-label text-muted">
                                             <input type="checkbox" class="form-check-input">
@@ -59,8 +79,8 @@
                                     </button>
                                 </div>
                                 <div class="text-center mt-4 font-weight-light">
-                                    Don't have an account? <a href="register.html" class="text-primary">Create</a>
-                                </div>
+                                    Don't have an account? <a href="register.html" class="text-primary">Create</a> 
+                                </div> --}}
                             </form>
                         </div>
                     </div>

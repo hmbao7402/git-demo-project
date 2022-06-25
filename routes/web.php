@@ -30,6 +30,8 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
     Route::group(['middleware' => ['admin']], function () {
         // Admin Dashboard Route 
         Route::get('dashboard', 'AdminController@dashboard');
+
+        // Admin Logout
+        Route::get('logout', 'AdminController@logout'); 
     });
 });
-// STOP AT VIDEO 10: Admin Login (I)
