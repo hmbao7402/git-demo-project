@@ -35,3 +35,4 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         Route::get('logout', 'AdminController@logout'); 
     });
 });
+// STOP AT CLIP 12 - Admin Login Form

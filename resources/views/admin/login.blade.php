@@ -36,7 +36,20 @@
                             @if(Session::has('error_message'))
                             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                 {{-- GET ERROR MESSAGE --}}
-                                <strong>Error</strong> {{Session::get('error_message')}}
+                                <strong>Error: </strong> {{Session::get('error_message')}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            @endif
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -47,14 +60,14 @@
                             <form class="pt-3" action="{{url('admin/login')}}" method="post">@csrf
                                 {{-- EMAIL --}}
                                 <div class="form-group">
-                                    <input type="email" name="email" id="email" class="form-control form-control-lg"
-                                        placeholder="Email" required>
+                                    <input type="text" name="email" id="email" class="form-control form-control-lg"
+                                        placeholder="Email">
                                 </div>
 
                                 {{-- PASSWORD --}}
                                 <div class="form-group">
                                     <input type="password" id="password" name="password"
-                                        class="form-control form-control-lg" placeholder="Password" required>
+                                        class="form-control form-control-lg" placeholder="Password">
                                 </div>
 
                                 {{-- SUBMIT BUTTON --}}
