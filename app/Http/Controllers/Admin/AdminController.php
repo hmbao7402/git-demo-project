@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -14,6 +15,26 @@ class AdminController extends Controller
         return view('admin.dashboard');
     }
 
+    public function updateAdminPassword()
+    {
+        // echo '<pre>';
+        // print_r(Auth::guard('admin')->user());
+        // echo '</pre>';
+        $adminDetails = Admin::where('email', Auth::guard('admin')
+        ->user()->email)->first()->toArray();
+        return view('admin.settings.update_admin_password')->with(compact('adminDetails'));
+    }
+
+    public function checkAdminPassword(Request $request) {
+        $data = $request->all();
+        // echo '<pre>'; print_r($data); echo '</pre>'; die;
+        if (Hash::check($data['current_password'], Auth::guard('admin')->user()->password)) {
+            return 'true';
+        } else { 
+            return 'false';
+        }
+    }
+    
     public function login(Request $request)
     {
         // echo $password = Hash::make('123456'); die;
@@ -56,4 +77,5 @@ class AdminController extends Controller
         Auth::guard('admin')->logout();
         return redirect('admin/login');
     }
+
 }

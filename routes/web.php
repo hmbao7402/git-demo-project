@@ -31,8 +31,14 @@ Route::prefix('/admin')->namespace('App\Http\Controllers\Admin')->group(function
         // Admin Dashboard Route 
         Route::get('dashboard', 'AdminController@dashboard');
 
+        // Update Admin password
+        Route::match(['get', 'post'], 'update-admin-password', 'AdminController@updateAdminPassword');
+
+        // Check admin password
+        Route::post('check-admin-password','AdminController@checkAdminPassword');
+
         // Admin Logout
         Route::get('logout', 'AdminController@logout'); 
     });
 });
-// STOP AT CLIP 12 - Admin Login Form
+// stop at clip 17 - update password (III)
