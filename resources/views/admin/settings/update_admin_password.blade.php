@@ -35,7 +35,28 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Update Admin Password</h4>
-                        <form class="forms-sample">
+                        {{-- ERROR MESSAGE --}}
+                        @if(Session::has('error_message'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{-- GET ERROR MESSAGE --}}
+                            <strong>Error: </strong> {{Session::get('error_message')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        {{-- SUCCESS MESSAGE --}}
+                        @if(Session::has('success_message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{-- GET SUCCESS MESSAGE --}}
+                            <strong>Success: </strong> {{Session::get('success_message')}}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        @endif
+                        {{-- UPDATE PASSWORD FORM --}}
+                        <form class="forms-sample" action="{{url('admin/update-admin-password')}}" method="post">@csrf
                             {{-- Username / Email --}}
                             <div class="form-group">
                                 <label>Admin Username/Email</label>
@@ -51,18 +72,18 @@
                                 <label for="current_password">Current Password</label>
                                 <input id="current_password" name="current_password" type="password"
                                     class="form-control" placeholder="Current Password" required>
-                                    <span id="check_password"></span>
+                                <span id="check_password"></span>
                             </div>
                             {{-- New Password --}}
                             <div class="form-group">
                                 <label for="new_password">New Password</label>
-                                <input type="password" class="form-control" id="new_password"
+                                <input type="password" class="form-control" id="new_password" name="new_password"
                                     placeholder="Enter New Password" required>
                             </div>
                             {{-- Confirm New Password --}}
                             <div class="form-group">
                                 <label for="confirm_password">New Password</label>
-                                <input type="password" class="form-control" id="confirm_password"
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password"
                                     placeholder="Confirm Password" required>
                             </div>
                             {{-- <div class="form-check form-check-flat form-check-primary">
